@@ -20,18 +20,18 @@ public class AccountProducer {
    @Autowired private DirectExchange exchange;
 
    @PostMapping
-    public void createAccount(@RequestBody AccountModel accountModel) {
+    public void create(@RequestBody AccountModel accountModel) {
         rabbitTemplate.convertAndSend(exchange.getName(), AccountConfiguration.createAccountRouting, accountModel);
     }
 
    @PutMapping("/{id}")
-    public void updateAccount(@PathVariable Long id, @RequestBody AccountModel accountModel) {
+    public void update(@PathVariable Long id, @RequestBody AccountModel accountModel) {
         accountModel.setId(id);
         rabbitTemplate.convertAndSend(exchange.getName(), AccountConfiguration.updateAccountRouting, accountModel);
     }
 
     @DeleteMapping("/{id}")
-    public void deleteAccount(@PathVariable Long id) {
+    public void delete(@PathVariable Long id) {
         rabbitTemplate.convertAndSend(exchange.getName(), AccountConfiguration.deleteAccountRouting, id);
     }
 
