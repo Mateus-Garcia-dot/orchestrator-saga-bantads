@@ -1,9 +1,9 @@
 package com.bantads.orchestratorSaga.config;
 
-import org.springframework.amqp.core.Binding;
-import org.springframework.amqp.core.BindingBuilder;
-import org.springframework.amqp.core.DirectExchange;
-import org.springframework.amqp.core.Queue;
+import jakarta.annotation.PostConstruct;
+import lombok.Data;
+import org.springframework.amqp.core.*;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
@@ -45,6 +45,5 @@ public class ManagerConfiguration {
     Binding deleteManagerBinding(Queue deleteManagerQueue, DirectExchange exchange) {
         return BindingBuilder.bind(deleteManagerQueue).to(exchange).with(deleteManagerRouting);
     };
-
 
 }

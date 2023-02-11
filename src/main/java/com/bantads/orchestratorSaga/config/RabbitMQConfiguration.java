@@ -15,7 +15,6 @@ public class RabbitMQConfiguration {
     @Bean
     DirectExchange exchange() {
         return new DirectExchange("orchestrator-saga");
-
     }
 
     @Bean
