@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.*;
 @AllArgsConstructor
 @NoArgsConstructor
 @RestController()
-@RequestMapping("/addresss")
+@RequestMapping("/address")
 public class AddressProducer {
 
     @Autowired private RabbitTemplate rabbitTemplate;
