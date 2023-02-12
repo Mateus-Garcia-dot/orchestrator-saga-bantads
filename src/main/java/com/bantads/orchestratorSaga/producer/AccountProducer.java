@@ -25,13 +25,13 @@ public class AccountProducer {
     }
 
    @PutMapping("/{id}")
-    public void update(@PathVariable Long id, @RequestBody AccountModel accountModel) {
-        accountModel.setId(id);
+    public void update(@PathVariable String id, @RequestBody AccountModel accountModel) {
+        accountModel.setUuid(id);
         rabbitTemplate.convertAndSend(exchange.getName(), AccountConfiguration.updateAccountRouting, accountModel);
     }
 
     @DeleteMapping("/{id}")
-    public void delete(@PathVariable Long id) {
+    public void delete(@PathVariable String id) {
         rabbitTemplate.convertAndSend(exchange.getName(), AccountConfiguration.deleteAccountRouting, id);
     }
 

@@ -1,11 +1,16 @@
 package com.bantads.orchestratorSaga.model;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
+
 
 @Data
+@NoArgsConstructor
+@AllArgsConstructor
 public class AuthModel {
-    private String id;
-    private Long account;
+    private String uuid;
+    private String account;
     private String login;
     private String password;
     private Integer type;

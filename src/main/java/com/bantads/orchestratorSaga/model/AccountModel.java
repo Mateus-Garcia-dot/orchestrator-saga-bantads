@@ -4,9 +4,9 @@ import lombok.Data;
 
 @Data
 public class AccountModel {
-    private Long id;
-    private Long customer;
-    private Long manager;
+    private String uuid;
+    private String customer;
+    private String manager;
     private Double limitAmount;
     private Double balance;
 }

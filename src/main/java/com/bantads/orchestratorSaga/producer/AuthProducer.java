@@ -25,12 +25,12 @@ public class AuthProducer {
 
     @PutMapping("/{id}")
     public void update(@PathVariable String id, @RequestBody AuthModel authModel) {
-        authModel.setId(id);
+        authModel.setUuid(id);
         rabbitTemplate.convertAndSend(exchange.getName(), AuthConfiguration.updateAuthRouting, authModel);
     }
 
     @DeleteMapping("/{id}")
-    public void delete(@PathVariable Long id) {
+    public void delete(@PathVariable String id) {
         rabbitTemplate.convertAndSend(exchange.getName(), AuthConfiguration.deleteAuthRouting, id);
     }
 }

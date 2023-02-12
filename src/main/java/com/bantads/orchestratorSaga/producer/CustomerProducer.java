@@ -28,8 +28,6 @@ public class CustomerProducer {
 
     @PutMapping("/{id}")
     public void update(@PathVariable Long id, @RequestBody CustomerModel customerModel) {
-        customerModel.setId(id);
-        rabbitTemplate.convertAndSend(exchange.getName(), CustomerConfiguration.updateCustomerRouting, customerModel);
     }
 
     @DeleteMapping("/{id}")

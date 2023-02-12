@@ -24,13 +24,13 @@ public class AddressProducer {
     }
 
     @PutMapping("/{id}")
-    public void update(@PathVariable Long id, @RequestBody AddressModel addressModel) {
-        addressModel.setId(id);
+    public void update(@PathVariable String id, @RequestBody AddressModel addressModel) {
+        addressModel.setUuid(id);
         rabbitTemplate.convertAndSend(exchange.getName(), AddressConfiguration.updateAddressRouting, addressModel);
     }
 
     @DeleteMapping("/{id}")
-    public void delete(@PathVariable Long id) {
+    public void delete(@PathVariable String id) {
         rabbitTemplate.convertAndSend(exchange.getName(), AddressConfiguration.deleteAddressRouting, id);
     }
 

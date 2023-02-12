@@ -7,10 +7,9 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class ManagerModel {
-    private Long id;
-    private String uuid;
-    private String name;
-    private String cpf;
-    private String telephone;
+public class RegisterModel {
+    private AuthModel authentication;
+    private CustomerModel customer;
+    private AddressModel address;
+    private AccountModel account;
 }

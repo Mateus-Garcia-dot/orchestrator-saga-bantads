@@ -8,7 +8,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class AddressModel {
-    private Long id;
+    private String uuid;
     private String type;
     private String street;
     private Integer number;
