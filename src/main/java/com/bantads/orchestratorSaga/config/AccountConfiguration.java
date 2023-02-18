@@ -14,7 +14,7 @@ public class AccountConfiguration {
     public static final String createAccountRouting = "account.create";
     public static final String updateAccountRouting = "account.update";
     public static final String deleteAccountRouting = "account.delete";
-    public static final String patchAccountRouting = "account.patch";
+    public static final String patchAccountRouting = "account.patch.consumer";
 
     @Bean
     public Queue createAccountQueue() {
