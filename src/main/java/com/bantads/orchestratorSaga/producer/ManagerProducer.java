@@ -10,13 +10,12 @@ import org.springframework.web.bind.annotation.*;
 
 @Data
 @AllArgsConstructor
-@NoArgsConstructor
 @RestController()
 @RequestMapping("/manager")
 public class ManagerProducer {
 
-    @Autowired private RabbitTemplate rabbitTemplate;
-    @Autowired private DirectExchange exchange;
+    private RabbitTemplate rabbitTemplate;
+    private DirectExchange exchange;
 
     @PostMapping
     public void create(@RequestBody ManagerModel managerModel) {

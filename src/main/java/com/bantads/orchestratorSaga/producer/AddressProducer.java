@@ -5,18 +5,16 @@ import com.bantads.orchestratorSaga.model.AddressModel;
 import lombok.*;
 import org.springframework.amqp.core.DirectExchange;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 @Data
 @AllArgsConstructor
-@NoArgsConstructor
 @RestController()
 @RequestMapping("/address")
 public class AddressProducer {
 
-    @Autowired private RabbitTemplate rabbitTemplate;
-    @Autowired private DirectExchange exchange;
+    private RabbitTemplate rabbitTemplate;
+    private DirectExchange exchange;
 
     @PostMapping
     public void create(@RequestBody AddressModel addressModel) {

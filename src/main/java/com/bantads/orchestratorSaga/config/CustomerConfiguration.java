@@ -12,9 +12,10 @@ import org.springframework.context.annotation.Import;
 @Import(RabbitMQConfiguration.class)
 public class CustomerConfiguration {
 
-     public static String createCustomerRouting = "customer.create";
-     public static String updateCustomerRouting = "customer.update";
-     public static String deleteCustomerRouting = "customer.delete";
+    public static String createCustomerRouting = "customer.create";
+    public static String updateCustomerRouting = "customer.update";
+    public static String deleteCustomerRouting = "customer.delete";
+    public static String patchCustomerRouting = "customer.patch";
 
     @Bean
     public Queue createCustomerQueue() {
@@ -32,6 +33,11 @@ public class CustomerConfiguration {
     }
 
     @Bean
+    public Queue patchCustomerQueue() {
+        return new Queue(patchCustomerRouting, true);
+    }
+
+    @Bean
     Binding createCustomerBinding(Queue createCustomerQueue, DirectExchange exchange) {
         return BindingBuilder.bind(createCustomerQueue).to(exchange).with(createCustomerRouting);
     }
@@ -45,4 +51,10 @@ public class CustomerConfiguration {
     Binding deleteCustomerBinding(Queue deleteCustomerQueue, DirectExchange exchange) {
         return BindingBuilder.bind(deleteCustomerQueue).to(exchange).with(deleteCustomerRouting);
     }
+
+    @Bean
+    Binding patchCustomerBinding(Queue patchCustomerQueue, DirectExchange exchange) {
+        return BindingBuilder.bind(patchCustomerQueue).to(exchange).with(patchCustomerRouting);
+    }
+
 }

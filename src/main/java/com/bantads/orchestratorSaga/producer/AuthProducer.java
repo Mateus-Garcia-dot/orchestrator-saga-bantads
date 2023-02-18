@@ -5,18 +5,16 @@ import com.bantads.orchestratorSaga.model.AuthModel;
 import lombok.*;
 import org.springframework.amqp.core.DirectExchange;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 @Data
 @AllArgsConstructor
-@NoArgsConstructor
 @RestController()
 @RequestMapping("/authentication")
 public class AuthProducer {
 
-    @Autowired private RabbitTemplate rabbitTemplate;
-    @Autowired private DirectExchange exchange;
+    private RabbitTemplate rabbitTemplate;
+    private DirectExchange exchange;
 
     @PostMapping
     public void create(@RequestBody AuthModel authModel) {

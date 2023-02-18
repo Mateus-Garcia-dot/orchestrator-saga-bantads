@@ -11,11 +11,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import org.springframework.amqp.core.DirectExchange;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.UUID;
 
@@ -25,14 +21,15 @@ import java.util.UUID;
 @RequestMapping("/")
 public class BusinessLogicProducer {
 
-    private final RabbitTemplate rabbitTemplate;
-    private final DirectExchange exchange;
+    private RabbitTemplate rabbitTemplate;
+    private DirectExchange exchange;
 
     @PostMapping("/register")
     public void register(@RequestBody RegisterModel registerModel) {
         String customerUuid = UUID.randomUUID().toString();
         String addressUuid = UUID.randomUUID().toString();
         String accountUuid = UUID.randomUUID().toString();
+
         registerModel.setAccount(new AccountModel());
 
         registerModel.getCustomer().setUuid(customerUuid);
@@ -45,7 +42,6 @@ public class BusinessLogicProducer {
 
         registerModel.getAuthentication().setAccount(accountUuid);
         registerModel.getAuthentication().setIsPending(true);
-        System.out.println(registerModel.getAuthentication());
 
         registerModel.getAddress().setUuid(addressUuid);
         registerModel.getAccount().setCustomer(customerUuid);
@@ -53,6 +49,16 @@ public class BusinessLogicProducer {
         rabbitTemplate.convertAndSend(exchange.getName(), AddressConfiguration.createAddressRouting, registerModel.getAddress());
         rabbitTemplate.convertAndSend(exchange.getName(), AuthConfiguration.createAuthRouting, registerModel.getAuthentication());
         rabbitTemplate.convertAndSend(exchange.getName(), AccountConfiguration.createAccountRouting, registerModel.getAccount());
+    }
+
+    @PatchMapping("/customer/{id}")
+    public void updateCustomer(@PathVariable String id, @RequestBody CustomerModel customerModel) {
+        customerModel.setUuid(id);
+        AccountModel accountModel = new AccountModel();
+        accountModel.setCustomer(id);
+        accountModel.setLimitAmount(customerModel.getSalary()/2);
+        rabbitTemplate.convertAndSend(exchange.getName(), AccountConfiguration.patchAccountRouting, accountModel);
+        rabbitTemplate.convertAndSend(exchange.getName(), CustomerConfiguration.patchCustomerRouting, customerModel);
     }
 
 }

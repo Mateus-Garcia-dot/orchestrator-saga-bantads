@@ -14,6 +14,7 @@ public class AccountConfiguration {
     public static final String createAccountRouting = "account.create";
     public static final String updateAccountRouting = "account.update";
     public static final String deleteAccountRouting = "account.delete";
+    public static final String patchAccountRouting = "account.patch";
 
     @Bean
     public Queue createAccountQueue() {
@@ -31,6 +32,11 @@ public class AccountConfiguration {
     }
 
     @Bean
+    public Queue patchAccountQueue() {
+        return new Queue(patchAccountRouting, true);
+    }
+
+    @Bean
     Binding createAccountBinding(Queue createAccountQueue, DirectExchange exchange) {
         return BindingBuilder.bind(createAccountQueue).to(exchange).with(createAccountRouting);
     }
@@ -43,5 +49,10 @@ public class AccountConfiguration {
     @Bean
     Binding deleteAccountBinding(Queue deleteAccountQueue, DirectExchange exchange) {
         return BindingBuilder.bind(deleteAccountQueue).to(exchange).with(deleteAccountRouting);
+    }
+
+    @Bean
+    Binding patchAccountBinding(Queue patchAccountQueue, DirectExchange exchange) {
+        return BindingBuilder.bind(patchAccountQueue).to(exchange).with(patchAccountRouting);
     }
 }

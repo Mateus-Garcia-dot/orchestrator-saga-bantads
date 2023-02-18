@@ -26,6 +26,7 @@ dependencies {
 	annotationProcessor 'org.projectlombok:lombok'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 	testImplementation 'org.springframework.amqp:spring-rabbit-test'
+	implementation 'org.springframework.boot:spring-boot-devtools:3.0.2'
 }
 
 tasks.named('test') {

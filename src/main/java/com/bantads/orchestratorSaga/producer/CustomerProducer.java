@@ -12,14 +12,12 @@ import org.springframework.web.bind.annotation.*;
 
 @Data
 @AllArgsConstructor
-@NoArgsConstructor
 @RestController()
 @RequestMapping("/custumer")
 public class CustomerProducer {
 
-
-    @Autowired private RabbitTemplate rabbitTemplate;
-    @Autowired private DirectExchange exchange;
+    private RabbitTemplate rabbitTemplate;
+    private DirectExchange exchange;
 
     @PostMapping
     public void create(@RequestBody CustomerModel customerModel) {

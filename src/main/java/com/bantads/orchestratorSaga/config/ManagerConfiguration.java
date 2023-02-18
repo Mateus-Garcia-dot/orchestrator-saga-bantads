@@ -46,5 +46,4 @@ public class ManagerConfiguration {
         return BindingBuilder.bind(deleteManagerQueue).to(exchange).with(deleteManagerRouting);
     };
 
-
 }
