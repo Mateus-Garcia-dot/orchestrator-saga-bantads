@@ -15,7 +15,7 @@ import java.util.UUID;
 @RestController
 @Data
 @AllArgsConstructor
-@RequestMapping("/")
+@RequestMapping("/bl")
 public class BusinessLogicProducer {
 
     private RabbitTemplate rabbitTemplate;
