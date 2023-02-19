@@ -1,9 +1,6 @@
 package com.bantads.orchestratorSaga.producer;
 
-import com.bantads.orchestratorSaga.config.AccountConfiguration;
-import com.bantads.orchestratorSaga.config.AddressConfiguration;
-import com.bantads.orchestratorSaga.config.AuthConfiguration;
-import com.bantads.orchestratorSaga.config.CustomerConfiguration;
+import com.bantads.orchestratorSaga.config.*;
 import com.bantads.orchestratorSaga.model.AccountModel;
 import com.bantads.orchestratorSaga.model.CustomerModel;
 import com.bantads.orchestratorSaga.model.RegisterModel;
@@ -59,6 +56,12 @@ public class BusinessLogicProducer {
         accountModel.setLimitAmount(customerModel.getSalary()/2);
         rabbitTemplate.convertAndSend(exchange.getName(), AccountConfiguration.patchAccountRouting, accountModel);
         rabbitTemplate.convertAndSend(exchange.getName(), CustomerConfiguration.patchCustomerRouting, customerModel);
+    }
+
+    @DeleteMapping("/manager/{id}")
+    public void deleteManager(@PathVariable String id) {
+        rabbitTemplate.convertAndSend(exchange.getName(), ManagerConfiguration.deleteManagerRouting, id);
+        rabbitTemplate.convertAndSend(exchange.getName(), AccountConfiguration.deleteAccoutManager, id);
     }
 
 }
