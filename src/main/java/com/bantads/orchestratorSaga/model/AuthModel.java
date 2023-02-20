@@ -9,7 +9,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class AuthModel {
     private String uuid;
-    private String custumer;
+    private String costumer;
     private String login;
     private String password;
     private Integer type;

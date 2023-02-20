@@ -37,7 +37,7 @@ public class BusinessLogicProducer {
         registerModel.getAccount().setBalance(0.0);
         registerModel.getAccount().setLimitAmount(registerModel.getCustomer().getSalary()/2);
 
-        registerModel.getAuthentication().setCustumer(customerUuid);
+        registerModel.getAuthentication().setCostumer(customerUuid);
         registerModel.getAuthentication().setIsPending(true);
 
         registerModel.getAddress().setUuid(addressUuid);
