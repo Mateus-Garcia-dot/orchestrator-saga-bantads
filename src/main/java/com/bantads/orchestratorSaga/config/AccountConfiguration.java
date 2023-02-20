@@ -15,7 +15,7 @@ public class AccountConfiguration {
     public static final String updateAccountRouting = "account.update";
     public static final String deleteAccountRouting = "account.delete";
     public static final String patchAccountRouting = "account.patch.consumer";
-    public static final String deleteAccoutManager = "account.delete.manager";
+    public static final String deleteAccountManager = "account.delete.manager";
 
     @Bean
     public Queue createAccountQueue() {
@@ -39,7 +39,7 @@ public class AccountConfiguration {
 
     @Bean
     public Queue deleteAccountManagerQueue() {
-        return new Queue(deleteAccoutManager, true);
+        return new Queue(deleteAccountManager, true);
     }
 
     @Bean
@@ -64,6 +64,6 @@ public class AccountConfiguration {
 
     @Bean
     Binding deleteAccountManagerBinding(Queue deleteAccountManagerQueue, DirectExchange exchange) {
-        return BindingBuilder.bind(deleteAccountManagerQueue).to(exchange).with(deleteAccoutManager);
+        return BindingBuilder.bind(deleteAccountManagerQueue).to(exchange).with(deleteAccountManager);
     }
 }

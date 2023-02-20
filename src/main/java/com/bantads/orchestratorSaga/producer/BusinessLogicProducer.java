@@ -37,7 +37,7 @@ public class BusinessLogicProducer {
         registerModel.getAccount().setBalance(0.0);
         registerModel.getAccount().setLimitAmount(registerModel.getCustomer().getSalary()/2);
 
-        registerModel.getAuthentication().setAccount(accountUuid);
+        registerModel.getAuthentication().setCustumer(customerUuid);
         registerModel.getAuthentication().setIsPending(true);
 
         registerModel.getAddress().setUuid(addressUuid);
@@ -61,7 +61,7 @@ public class BusinessLogicProducer {
     @DeleteMapping("/manager/{id}")
     public void deleteManager(@PathVariable String id) {
         rabbitTemplate.convertAndSend(exchange.getName(), ManagerConfiguration.deleteManagerRouting, id);
-        rabbitTemplate.convertAndSend(exchange.getName(), AccountConfiguration.deleteAccoutManager, id);
+        rabbitTemplate.convertAndSend(exchange.getName(), AccountConfiguration.deleteAccountManager, id);
     }
 
 }
