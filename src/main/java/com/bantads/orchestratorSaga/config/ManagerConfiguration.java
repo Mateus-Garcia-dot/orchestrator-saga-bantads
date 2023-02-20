@@ -15,6 +15,7 @@ public class ManagerConfiguration {
     public static final String createManagerRouting = "manager.create";
     public static final String updateManagerRouting = "manager.update";
     public static final String deleteManagerRouting = "manager.delete";
+    public static final String patchManagerRouting = "manager.patch";
 
     @Bean
     public Queue createManagerQueue() {
@@ -32,6 +33,11 @@ public class ManagerConfiguration {
     }
 
     @Bean
+    public Queue patchManagerQueue() {
+        return new Queue(patchManagerRouting, true);
+    }
+
+    @Bean
     Binding createManagerBinding(Queue createManagerQueue, DirectExchange exchange) {
         return BindingBuilder.bind(createManagerQueue).to(exchange).with(createManagerRouting);
     };
@@ -44,6 +50,11 @@ public class ManagerConfiguration {
     @Bean
     Binding deleteManagerBinding(Queue deleteManagerQueue, DirectExchange exchange) {
         return BindingBuilder.bind(deleteManagerQueue).to(exchange).with(deleteManagerRouting);
+    };
+
+    @Bean
+    Binding patchManagerBinding(Queue patchManagerQueue, DirectExchange exchange) {
+        return BindingBuilder.bind(patchManagerQueue).to(exchange).with(patchManagerRouting);
     };
 
 }

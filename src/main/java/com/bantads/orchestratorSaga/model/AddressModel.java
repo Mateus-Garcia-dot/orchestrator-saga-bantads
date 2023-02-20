@@ -9,6 +9,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class AddressModel {
     private String uuid;
+    private String customer;
     private String type;
     private String street;
     private Integer number;

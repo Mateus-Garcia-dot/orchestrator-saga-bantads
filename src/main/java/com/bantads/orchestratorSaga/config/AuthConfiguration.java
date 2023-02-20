@@ -15,6 +15,7 @@ public class AuthConfiguration {
     public static final String createAuthRouting = "auth.create";
     public static final String updateAuthRouting = "auth.update";
     public static final String deleteAuthRouting = "auth.delete";
+    public static final String patchAuthRouting = "auth.patch";
 
     @Bean
     public Queue createAuthQueue() {
@@ -32,6 +33,11 @@ public class AuthConfiguration {
     }
 
     @Bean
+    public Queue patchAuthQueue() {
+        return new Queue(patchAuthRouting, true);
+    }
+
+    @Bean
     Binding createAuthBinding(Queue createAuthQueue, DirectExchange exchange) {
         return BindingBuilder.bind(createAuthQueue).to(exchange).with(createAuthRouting);
     }
@@ -44,6 +50,11 @@ public class AuthConfiguration {
     @Bean
     Binding deleteAuthBinding(Queue deleteAuthQueue, DirectExchange exchange) {
         return BindingBuilder.bind(deleteAuthQueue).to(exchange).with(deleteAuthRouting);
+    }
+
+    @Bean
+    Binding patchAuthBinding(Queue patchAuthQueue, DirectExchange exchange) {
+        return BindingBuilder.bind(patchAuthQueue).to(exchange).with(patchAuthRouting);
     }
 
 }

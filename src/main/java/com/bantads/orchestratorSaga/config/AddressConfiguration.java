@@ -14,6 +14,7 @@ public class AddressConfiguration {
     public static final String createAddressRouting = "address.create";
     public static final String updateAddressRouting = "address.update";
     public static final String deleteAddressRouting = "address.delete";
+    public static final String patchAddressRouting = "address.patch";
 
     @Bean
     public Queue createAddressQueue() {
@@ -31,6 +32,11 @@ public class AddressConfiguration {
     }
 
     @Bean
+    public Queue patchAddressQueue() {
+        return new Queue(patchAddressRouting, true);
+    }
+
+    @Bean
     Binding createAddressBinding(Queue createAddressQueue, DirectExchange exchange) {
         return BindingBuilder.bind(createAddressQueue).to(exchange).with(createAddressRouting);
     }
@@ -43,5 +49,10 @@ public class AddressConfiguration {
     @Bean
     Binding deleteAddressBinding(Queue deleteAddressQueue, DirectExchange exchange) {
         return BindingBuilder.bind(deleteAddressQueue).to(exchange).with(deleteAddressRouting);
+    }
+
+    @Bean
+    Binding patchAddressBinding(Queue patchAddressQueue, DirectExchange exchange) {
+        return BindingBuilder.bind(patchAddressQueue).to(exchange).with(patchAddressRouting);
     }
 }
